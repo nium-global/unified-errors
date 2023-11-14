@@ -1,0 +1,112 @@
+openapi: 3.1.0
+info:
+  title: Unified Errors Response
+  version: 1.0.0
+
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties: 
+        errors: 
+          type: array
+          items: 
+            $ref: '#/components/schemas/Error'
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+        field:
+          type: string
+      required:
+        - code
+        - description
+
+    Standard500Error:
+      type: object
+      properties:
+        code:
+          type: string
+          default: internal_error
+          enum:
+            - internal_error
+            - external_dependent_system_failed
+        description:
+          type: string
+          default: "An internal error occurred"
+          enum:
+            - "An internal error occurred"
+
+    Standard404Error:
+      type: object
+      properties:
+        code:
+          type: string
+          default: resource_not_found
+          enum:
+            - resource_not_found
+        description:
+          type: string
+          default: "Resource not found"
+
+    Standard403Error:
+      type: object
+      properties:
+        code:
+          type: string
+          default: access_forbidden
+          enum:
+            - access_forbidden
+        description:
+          type: string
+          default: "Access to resource not allowed"
+          enum:
+            - "Access to resource not allowed"
+
+    Standard401Error:
+      type: object
+      properties:
+        code:
+          type: string
+          default: unauthorized
+          enum:
+            - unauthorized
+        description:
+          type: string
+          default: "Access Denied"
+          enum:
+            - "Access Denied"
+
+  # Custom extension to add extra metadata for each error code.
+  # Can use this info to display the details of all Nium error codes in a dedicated errors page on our documentation website.
+  x-unified-errors-catalog:
+    - code: unauthorized
+      httpStatus: 401
+      retriable: false
+      descriptions:
+        en: Authentication credentials provided is missing or invalid
+    - code: access_forbidden 
+      httpStatus: 403
+      retriable: false
+      descriptions:
+        en: Access to the specific resource is denied.
+    - code: resource_not_found 
+      httpStatus: 404
+      retriable: false
+      descriptions:
+        en: The resource specified was not found.
+    - code: internal_server_error
+      httpStatus: 500
+      retriable: true
+      descriptions:
+        en: An internal error occurred. 
+    - code: external_dependent_system_failed 
+      httpStatus: 500
+      retriable: true
+      descriptions:
+        en: An external system that Nium depends on to process your request failed. 
+
