@@ -52,6 +52,8 @@ components:
         description:
           type: string
           default: "Resource not found"
+          enum:
+            - "Resource not found"
 
     Standard403Error:
       type: object
