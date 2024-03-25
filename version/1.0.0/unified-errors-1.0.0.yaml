@@ -83,6 +83,20 @@ components:
           enum:
             - "Access Denied"
 
+    Standard400Error:
+      type: object
+      properties:
+        code:
+          type: string
+          default: invalid_input
+          enum:
+            - invalid_input
+        description:
+          type: string
+          default: "Invalid input provided"
+          enum:
+            - "Invalid input provided"
+
   # Custom extension to add extra metadata for each error code.
   # Can use this info to display the details of all Nium error codes in a dedicated errors page on our documentation website.
   x-unified-errors-catalog:
