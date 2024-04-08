@@ -88,16 +88,36 @@ components:
       properties:
         code:
           type: string
-          default: invalid_input
           enum:
             - invalid_input
         description:
           type: string
-          default: "Invalid input provided"
           enum:
-            - "Invalid input provided"
+            - "Syntactically incorrect input provided"
         field:
           type: string
+      required:
+        - code
+        - description
+
+  
+    Standard422Error:
+      type: object
+      properties:
+        code:
+          type: string
+          default: unprocessable_input
+          enum:
+            - unprocessable_input
+        description:
+          type: string
+          enum:
+            - "Semantically incorrect input provided"
+        field:
+          type: string
+      required:
+        - code
+        - description
 
   # Custom extension to add extra metadata for each error code.
   # Can use this info to display the details of all Nium error codes in a dedicated errors page on our documentation website.
