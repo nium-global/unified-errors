@@ -124,7 +124,7 @@ components:
       properties:
         code:
           type: string
-          default: unprocessable_input
+          default: unsupported_media_type
           enum:
             - unsupported_media_type
         description:
