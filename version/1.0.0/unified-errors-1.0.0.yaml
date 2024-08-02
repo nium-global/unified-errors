@@ -119,6 +119,22 @@ components:
         - code
         - description
 
+    Standard415Error:
+      type: object
+      properties:
+        code:
+          type: string
+          default: unprocessable_input
+          enum:
+            - unsupported_media_type
+        description:
+          type: string
+          enum:
+            - "Payload format is not supported"
+      required:
+        - code
+        - description
+        
   # Custom extension to add extra metadata for each error code.
   # Can use this info to display the details of all Nium error codes in a dedicated errors page on our documentation website.
   x-unified-errors-catalog:
