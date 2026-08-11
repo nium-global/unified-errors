@@ -134,7 +134,55 @@ components:
       required:
         - code
         - description
-        
+
+    Standard409Error:
+      type: object
+      properties:
+        code:
+          type: string
+          default: conflict
+          enum:
+            - conflict
+        description:
+          type: string
+          enum:
+            - "Request conflicts with the current state of the resource"
+      required:
+        - code
+        - description
+
+    Standard503Error:
+      type: object
+      properties:
+        code:
+          type: string
+          default: service_unavailable
+          enum:
+            - service_unavailable
+        description:
+          type: string
+          enum:
+            - "Service temporarily unavailable, please retry after some time"
+      required:
+        - code
+        - description
+
+    Standard504Error:
+      type: object
+      properties:
+        code:
+          type: string
+          default: gateway_timeout
+          enum:
+            - gateway_timeout
+        description:
+          type: string
+          enum:
+            - "The request timed out while waiting for a downstream service. Please retry later."
+      required:
+        - code
+        - description
+
   # Custom extension to add extra metadata for each error code.
   # Can use this info to display the details of all Nium error codes in a dedicated errors page on our documentation website.
   x-unified-errors-catalog:
@@ -153,6 +201,16 @@ components:
       retriable: false
       descriptions:
         en: The resource specified was not found.
+    - code: conflict
+      httpStatus: 409
+      retriable: false
+      descriptions:
+        en: The request conflicts with the current state of the resource.
+    - code: unprocessable_input
+      httpStatus: 422
+      retriable: false
+      descriptions:
+        en: The input provided is semantically incorrect and cannot be processed.
     - code: internal_server_error
       httpStatus: 500
       retriable: true
@@ -162,5 +220,14 @@ components:
       httpStatus: 500
       retriable: true
       descriptions:
-        en: An external system that Nium depends on to process your request failed. 
-
+        en: An external system that Nium depends on to process your request failed.
+    - code: service_unavailable
+      httpStatus: 503
+      retriable: true
+      descriptions:
+        en: The service is temporarily unavailable. Please retry after some time.
+    - code: gateway_timeout
+      httpStatus: 504
+      retriable: true
+      descriptions:
+        en: The request timed out while waiting for a downstream service. Please retry later.
