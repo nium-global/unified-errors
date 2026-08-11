@@ -100,7 +100,7 @@ components:
         - code
         - description
 
-  
+
     Standard422Error:
       type: object
       properties:
@@ -111,10 +111,9 @@ components:
             - unprocessable_input
         description:
           type: string
+          default: "Semantically incorrect input provided"
           enum:
             - "Semantically incorrect input provided"
-        field:
-          type: string
       required:
         - code
         - description
@@ -145,6 +144,7 @@ components:
             - conflict
         description:
           type: string
+          default: "Request conflicts with the current state of the resource"
           enum:
             - "Request conflicts with the current state of the resource"
       required:
@@ -161,6 +161,7 @@ components:
             - service_unavailable
         description:
           type: string
+          default: "Service temporarily unavailable, please retry after some time"
           enum:
             - "Service temporarily unavailable, please retry after some time"
       required:
@@ -177,6 +178,7 @@ components:
             - gateway_timeout
         description:
           type: string
+          default: "The request timed out while waiting for a downstream service. Please retry later."
           enum:
             - "The request timed out while waiting for a downstream service. Please retry later."
       required:
